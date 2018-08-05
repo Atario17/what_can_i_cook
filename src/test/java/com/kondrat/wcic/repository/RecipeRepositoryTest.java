@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.Assert.*;
 
@@ -158,8 +159,10 @@ public class RecipeRepositoryTest {
     public void findByNameTest(){
         //походу в этот момент жареная картошка удалена из базы
         String randomString = UUID.randomUUID().toString();
+        Integer id = ThreadLocalRandom.current().nextInt();
         //сделать с новым именем рецепт и работать с ним
-        SmallRecipe smallRecipe = recipeRepository.findByName("Жареная картошка");
-        assertEquals(recipeRepository.findById(1).orElseGet(null), smallRecipe);
+        recipeRepository.save(new SmallRecipe(randomString, id));
+        SmallRecipe smallRecipe = recipeRepository.findByName(randomString);
+        assertEquals(recipeRepository.findById(id).orElseGet(null), smallRecipe);
     }
 }
