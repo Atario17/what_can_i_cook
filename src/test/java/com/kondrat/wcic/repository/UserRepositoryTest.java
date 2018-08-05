@@ -27,6 +27,7 @@ public class UserRepositoryTest {
 
     @Test
     public void createIfNotExistsTest(){
+        //bbb
         assertTrue(userRepository.createIfNotExists(new User((int) (Math.random() * 1000000),"Vasya", "123")));
         assertEquals(3,userRepository.findAll().size());
         assertFalse(userRepository.createIfNotExists( new User((int) (Math.random() * 1000000),"Vasya", "123")));
