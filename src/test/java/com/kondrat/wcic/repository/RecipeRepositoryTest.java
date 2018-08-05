@@ -157,6 +157,7 @@ public class RecipeRepositoryTest {
     }
     @Test
     public void findByNameTest(){
+        //haha
         String randomString = UUID.randomUUID().toString();
         Integer id = ThreadLocalRandom.current().nextInt();
         //сделать с новым именем рецепт и работать с ним
