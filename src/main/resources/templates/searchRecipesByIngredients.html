@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>What can I cook?</title>
+</head>
+<body>
+<a th:href="@{/returnLoginPage}"><br>Войти в личный кабинет</br></a>
+<a th:href="@{/returnSignUpPage}"><br>Зарегистрироваться</br></a>
+<a th:href="@{/inputFieldsForSearchRecipesByIngredients}"><br>Поиск рецептов по имеющимся продуктам </br></a>
+<a th:href="@{/inputFieldsForSearchRecipesByIngredient}"><br>Поиск рецептов, содержащих конкретный продукт</br></a>
+<a th:href="@{/showAllRecipes}"><br>Посмотреть все рецепты</br></a>
+<a th:href="@{/inputFieldForAdditionRecipe}"><br>Добавление рецепта</br></a>
+<a th:href="@{/inputFieldForDeletionRecipe}"><br>Удаление рецепта</br></a>
+<form action="/listOfRecipes" method = "post">
+    <p><strong>Введите названия продуктов, которые у вас есть:</strong></p>
+    <p><input type="text" placeholder="Введите название продукта..." maxlength="25" size="27" name="param"></p>
+    <p><input type="text" placeholder="Введите название продукта..." maxlength="25" size="27" name="param"></p>
+    <p><input type="text" placeholder="Введите название продукта..." maxlength="25" size="27" name="param"></p>
+    <p><input type="text" placeholder="Введите название продукта..." maxlength="25" size="27" name="param"></p>
+    <p><input type="text" placeholder="Введите название продукта..." maxlength="25" size="27" name="param"></p>
+    <p><input type="text" placeholder="Введите название продукта..." maxlength="25" size="27" name="param"></p>
+    <p><input type="submit" value="Отправить" ></p>
+</form>
+<!--<form action="/welcomeToWCIC" >-->
+    <!--<p><input type="submit" value="Назад"> </p>-->
+<!--</form>-->
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>What can I cook?</title>
+</head>
+<body>
+<a th:href="@{/returnLoginPage}"><br>Войти в личный кабинет</br></a>
+<a th:href="@{/returnSignUpPage}"><br>Зарегистрироваться</br></a>
+<a th:href="@{/inputFieldsForSearchRecipesByIngredients}"><br>Поиск рецептов по имеющимся продуктам </br></a>
+<a th:href="@{/inputFieldsForSearchRecipesByIngredient}"><br>Поиск рецептов, содержащих конкретный продукт</br></a>
+<a th:href="@{/showAllRecipes}"><br>Посмотреть все рецепты</br></a>
+<a th:href="@{/inputFieldForAdditionRecipe}"><br>Добавление рецепта</br></a>
+<a th:href="@{/inputFieldForDeletionRecipe}"><br>Удаление рецепта</br></a>
+<h3>Список рецептов, которые содержат: </h3>
+<h4 th:text="${ingredient}"></h4>
+<table>
+    <tbody>
+    <tr th:each="recipe: ${list}">
+        <ul>
+            <td>
+                <li>
+                    <a th:text="${recipe.name}"
+                       th:href="@{http://localhost:8080/descriptionOfRecipe(id=${recipe.id})}">
+                    </a>
+                </li>
+            </td>
+        </ul>
+    </tr>
+    </tbody>
+</table>
+<form action="/inputFieldsForSearchRecipesByIngredient" >
+    <p><input type="submit" value="Назад"> </p>
+</form>
+</body>
+</html>

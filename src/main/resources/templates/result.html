@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>What can I cook?</title>
+</head>
+<body>
+<a th:href="@{/returnLoginPage}"><br>Войти в личный кабинет</br></a>
+<a th:href="@{/returnSignUpPage}"><br>Зарегистрироваться</br></a>
+<a th:href="@{/inputFieldsForSearchRecipesByIngredients}"><br>Поиск рецептов по имеющимся
+    продуктам </br></a>
+<a th:href="@{/inputFieldsForSearchRecipesByIngredient}"><br>Поиск рецептов, содержащих конкретный
+    продукт</br></a>
+<a th:href="@{/showAllRecipes}"><br>Посмотреть все рецепты</br></a>
+<a th:href="@{/inputFieldForAdditionRecipe}"><br>Добавление рецепта</br></a>
+<a th:href="@{/inputFieldForDeletionRecipe}"><br>Удаление рецепта</br></a>
+<h3>Из ингредиентов, которые вы ввели: </h3>
+<table>
+    <tbody>
+    <tr th:each="ingredient: ${usersIngredients}">
+        <ul>
+            <td>
+                <li
+                    th:text="${ingredient}">
+                </li>
+            </td>
+        </ul>
+    </tr>
+    </tbody>
+</table>
+<h3>Вы можете приготовить следующие блюда: </h3>
+<table>
+    <tbody>
+    <tr th:each="prod: ${list}">
+        <ol>
+            <td>
+                <li><a th:text="${prod.name}"
+                       th:href="@{http://localhost:8080/descriptionOfRecipe(id=${prod.id})}">
+                </a>
+                </li>
+            </td>
+        </ol>
+    </tr>
+    </tbody>
+</table>
+<form action="/inputFieldsForSearchRecipesByIngredients">
+    <p><input type="submit" value="Назад"></p>
+</form>
+</body>
+</html>

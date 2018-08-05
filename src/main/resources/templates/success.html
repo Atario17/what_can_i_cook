@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>What can i cook?</title>
+</head>
+<body>
+<h1>Вы вошли под именем:</h1>
+<p th:text="${login}"></p>
+<form action="/welcomeToWCIC" >
+    <p><input type="submit" value="Продолжить"> </p>
+</form>
+<p><input type="submit" value="Выйти из личного кабинета"> </p>
+</body>
+
+</html>

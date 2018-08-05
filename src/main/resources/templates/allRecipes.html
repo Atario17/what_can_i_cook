@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>What can I cook?</title>
+</head>
+<body>
+<a th:href="@{/returnLoginPage}"><br>Войти в личный кабинет</br></a>
+<a th:href="@{/returnSignUpPage}"><br>Зарегистрироваться</br></a>
+<a th:href="@{/inputFieldsForSearchRecipesByIngredients}"><br>Поиск рецептов по имеющимся продуктам </br></a>
+<a th:href="@{/inputFieldsForSearchRecipesByIngredient}"><br>Поиск рецептов, содержащих конкретный продукт</br></a>
+<a th:href="@{/showAllRecipes}"><br>Посмотреть все рецепты</br></a>
+<a th:href="@{/inputFieldForAdditionRecipe}"><br>Добавить рецепт</br></a>
+<a th:href="@{/inputFieldForDeletionRecipe}"><br>Удалить рецепт</br></a>
+
+
+<table>
+    <tbody>
+    <tr th:each="recipe:${allRecipes}">
+        <td>
+            <form action="/removeRecipe" method="post">
+            <a th:text="${recipe.name}" th:href="@{/descriptionOfRecipe(id=${recipe.id})}"></a>
+            <p><input type="submit" value="Удалить рецепт"></p>
+            <!--<input type="hidden" name="recipe_name" th:value="${recipe.name}"/>-->
+                <!--как передавать имя методу removeRecipe-->
+                <input type="hidden" name="recipeId" th:value="${recipe.id}"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

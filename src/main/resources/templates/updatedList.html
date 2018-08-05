@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>What can I cook?</title>
+</head>
+<body>
+<a th:href="@{/returnLoginPage}"><br>Войти в личный кабинет</br></a>
+<a th:href="@{/returnSignUpPage}"><br>Зарегистрироваться</br></a>
+<a th:href="@{/inputFieldsForSearchRecipesByIngredients}"><br>Поиск рецептов по имеющимся продуктам </br></a>
+<a th:href="@{/inputFieldsForSearchRecipesByIngredient}"><br>Поиск рецептов, содержащих конкретный продукт</br></a>
+<a th:href="@{/showAllRecipes}"><br>Посмотреть все рецепты</br></a>
+<a th:href="@{/inputFieldForAdditionRecipe}"><br>Добавление рецепта</br></a>
+<a th:href="@{/inputFieldForDeletionRecipe}"><br>Удаление рецепта</br></a>
+<h3>Рецепт, который вы удалили: </h3>
+<h4 th:text="${remoteRecipe.name}"></h4>
+<h3>Список рецептов:</h3>
+<table>
+    <tbody>
+    <tr th:each="recipe: ${list}">
+        <ul>
+            <td>
+                <li
+                        th:text="${recipe.name}">
+                </li>
+            </td>
+        </ul>
+    </tr>
+    </tbody>
+</table>
+<form action="/inputFieldForDeletionRecipe" >
+    <p><input type="submit" value="Назад"> </p>
+</form>
+</body>
+</html>

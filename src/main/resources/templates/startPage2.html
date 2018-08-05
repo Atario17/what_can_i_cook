@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>What can I cook?</title>
+</head>
+<body>
+<!-- почекать по дизайну что-нибудь, забыла как возвращаться на страницу назад-->
+<!--для html recipeInstruction кнопка назад, как сохранять параметры-->
+
+<form id="1" action="/inputFieldsForSearchRecipesByIngredients" target="area"></form>
+<!--target="area"-->
+<form id="2" action="/inputFieldsForSearchRecipesByIngredient" target="area"></form>
+<form id="3" action="/inputFieldForAdditionRecipe" target="area"></form>
+<form id="4" action="/inputFieldForDeletionRecipe" target="area"></form>
+
+<p><input type="submit" value="Поиск рецептов по имеющимся продуктам" form="1"></p>
+<p><input type="submit" value="Поиск рецептов, содержащих конкретный продукт" form="2"></p>
+<p><input type="submit" value="Добавление рецепта" form="3"></p>
+<p><input type="submit" value="Удаление рецепта" form="4"></p>
+<p><iframe login="area" width="700" height="700" frameborder="no"></iframe></p>
+</body>
+</html>
+
+
+<!--<p><iframe login="area" width="500" height="200"></iframe></p>-->
+<!--<p><input type="submit" value="Поиск рецептов по имеющимся продуктам" form="searchRecipesByIngredients"></p>
+<p><input type="submit" value="Поиск рецептов, содержащих конкретный продукт" form="searchRecipesByIngredient"></p>
+<p><input type="submit" value="Добавление рецепта" form="additionRecipe"></p>
+<p><input type="submit" value="Удаление рецепта" form="deletionRecipes"></p>-->
+<!--<p><area shape="poly" href="searchRecipesByIngredients.html" alt="Поиск рецептов по имеющимся продуктам"></p>
+<p><area shape="poly" href="searchRecipesByIngredient.html" alt="Поиск рецептов, содержащих конкретный продукт"></p>
+<p><area shape="poly" href="addRecipe.html" alt="Добавление рецепта"></p>
+<p><area shape="poly" href="deleteRecipes.html" alt="Удаление рецепта"></p>-->
+<!--   <map login="Navigation">
+<p><area shape="poly" coords="113,24,211,24,233,0,137,0" href="searchRecipesByIngredients.html" alt="Поиск рецептов по имеющимся продуктам"></p>
+<p><area shape="poly" coords="210,24,233,0,329,0,307,24" href="searchRecipesByIngredient.html" alt="Поиск рецептов, содержащих конкретный продукт"></p>
+<p><area shape="poly" coords="304,24,385,24,407,0,329,0" href="addRecipe.html" alt="Добавление рецепта"></p>
+<p><area shape="poly" coords="384,24,449,24,473,0,406,0" href="deleteRecipes.html" alt="Удаление рецепта"></p>
+</map></p>-->
