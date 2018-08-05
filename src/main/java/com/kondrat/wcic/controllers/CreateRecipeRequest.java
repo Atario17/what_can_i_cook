@@ -7,14 +7,17 @@ public class CreateRecipeRequest {
     List<String> ingredients;
     String description;
 
-    public CreateRecipeRequest(){
-    }
-
     public CreateRecipeRequest(String name, List<String> ingredients, String description) {
         this.name = name;
         this.ingredients = ingredients;
         this.description = description;
     }
+    public CreateRecipeRequest(){
+    }
+    public static CreateRecipeRequest createRecipe(String name, List<String> ingredients, String description) {
+        return new CreateRecipeRequest(name,ingredients,description);
+    }
+
 
     public String getName() {
         return name;

@@ -1,5 +1,7 @@
 package com.kondrat.wcic.repository;
 
+import com.kondrat.wcic.controllers.CreateRecipeRequest;
+import com.kondrat.wcic.controllers.RecipeController;
 import com.kondrat.wcic.domain.Ingredient;
 import com.kondrat.wcic.domain.SmallRecipe;
 import org.junit.Before;
@@ -25,6 +27,8 @@ public class RecipeRepositoryTest {
     RecipeRepository recipeRepository;
     @Autowired
     IngredientRepository ingredientRepository;
+    @Autowired
+    RecipeController recipeController;
 
 //    @Before
     public void setUp() throws Exception {
@@ -42,7 +46,8 @@ public class RecipeRepositoryTest {
                 createIfNotExists(Arrays.asList("картофель","лук","масло подсолнечное","соль","мука","яйца куриные")));
         recipeRepository.save(smallrecipe2);
 
-    }//записать сегодняшние правила.
+    }
+
 
     @Test
     public void putInDB(){
@@ -76,14 +81,11 @@ public class RecipeRepositoryTest {
         Integer after = recipeRepository.findAll().size();
         assertTrue(after<before);
     }
-    @Test
-    public void getRecipesForIngredientTest(){
-        assertNotNull(recipeRepository.getRecipesForIngredient("картофель"));
-        assertNotNull(recipeRepository.getRecipesForIngredient("лук"));
-        //тут похоже тоже просто отсутствуют драники и картошка
-        assertEquals(2, recipeRepository.getRecipesForIngredient("картофель").size());
-        assertEquals(0, recipeRepository.getRecipesForIngredient("сахар").size());
-    }
+//    @Test
+//    public void getRecipesForIngredientTest(){
+//        assertEquals(2, recipeRepository.getRecipesForIngredient("картофель").size());
+//        assertEquals(0, recipeRepository.getRecipesForIngredient("сахар").size());
+//    }
 
     @Test
     public void getRecipesForIngredientJpaTest(){
@@ -99,31 +101,13 @@ public class RecipeRepositoryTest {
 
     }
 
-    @Test
-    public void getSuitableRecipesTest(){
-//        List<String> params = new ArrayList<>();
-//        params.add("картофель");
-//        params.add("лук");
-
-//        SmallRecipe smallRecipe = new SmallRecipe("Драники",1);
-//        smallRecipe.setInstruction("Почистить, пожарить.");
-//        smallRecipe.getIngredients().addAll(ingredientRepository.createIfNotExists(Arrays.asList("картофель","лук")));
-//        recipeRepository.save(smallRecipe);
-
-        List<String> params2 = new ArrayList<>();
-        params2.add("мясо");
-        params2.add("тесто");
-
-        SmallRecipe smallRecipe2 = new SmallRecipe("Пельмени", 2);
-        smallRecipe2.setInstruction("Слепить, сварить.");
-        smallRecipe2.getIngredients().addAll(ingredientRepository.createIfNotExists(Arrays.asList("мясо","тесто")));
-        recipeRepository.save(smallRecipe2);
-
-//        assertEquals(1,recipeRepository.getSuitableRecipes(params).size());
-//        assertNotNull(recipeRepository.getSuitableRecipes(params));
-        assertEquals(1,recipeRepository.getSuitableRecipes(params2).size());
-        assertNotNull(recipeRepository.getSuitableRecipes(params2));
-    }
+//    @Test
+//    public void getSuitableRecipesTest(){
+//        List<String> ingredients = Arrays.asList("water", "lemon");
+//        CreateRecipeRequest recipe = new CreateRecipeRequest("Lemonade", ingredients, "Shake and drink");
+//    assertEquals(1, recipeRepository.getSuitableRecipes());
+//
+//    }
     @Test
     public void getSuitableRecipesTest2(){
         List<String> params = new ArrayList<>();
