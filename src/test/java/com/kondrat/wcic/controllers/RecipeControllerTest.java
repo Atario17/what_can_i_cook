@@ -167,6 +167,7 @@ public class RecipeControllerTest {
         recipeController.showNewRecipe(model, new CreateRecipeRequest("Борщ", ingredients2,
                 "Нарезать, добавить поочередно в бульон, варить"));
         assertEquals(5, recipeController.recipeRepository.findAll().size());
+        //нужно ли со строки 171 по 182 в этом методе удалять те рецепты, что создавались в пределах этого же метода?
 //        for(Ingredient ingredient : recipeRepository.findByName("Борщ").getIngredients()){
 //            if(ingredient.getName()!="соль" || ingredient.getName()!="картофель") {
 //                recipeController.removeIngredient(model, null, ingredient.getName());
