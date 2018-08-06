@@ -41,6 +41,16 @@ public interface RecipeRepository extends JpaRepository<SmallRecipe, Integer> {
         }
         return suitableRecipes;
     }
+    //выбрать все объекты а типа SmallRecipe у которых есть ингредиент с именем
+    @Query("select a from SmallRecipe a join a.ingredients i where i.name = ?1")
+    List<SmallRecipe> getRecipesForIngredientJpa(String ingredient);
+    //потом доделаем
+    @Query("select a from SmallRecipe a join a.ingredients i where i.name = ?1")
+    List<SmallRecipe> getSuitableRecipesJpa(List<String> params);
+
+    @Query(value = "select count(*) from small_recipe s where s.name = ?1",
+            nativeQuery = true
+    )
 
     default List<SmallRecipe> getSuitableRecipes(List<String> params) {
         List<SmallRecipe> listForRecipes = findAll();
@@ -59,17 +69,8 @@ public interface RecipeRepository extends JpaRepository<SmallRecipe, Integer> {
         }
         return suitablesRecipes;
     }
-    //выбрать все объекты а типа SmallRecipe у которых есть ингредиент с именем
-    @Query("select a from SmallRecipe a join a.ingredients i where i.name = ?1")
-    List<SmallRecipe> getRecipesForIngredientJpa(String ingredient);
-    //потом доделаем
-    @Query("select a from SmallRecipe a join a.ingredients i where i.name = ?1")
-    List<SmallRecipe> getSuitableRecipesJpa(List<String> params);
 
-    @Query(value = "select count(*) from small_recipe s where s.name = ?1",
-           nativeQuery = true
-    )
-    int fjhgfjhgf(String recipe);
+//    int fjhgfjhgf(String recipe);
     //    default List<SmallRecipe> removeElement(String name){
 //        if(findAll().size()!=0) {
 //            for (SmallRecipe smallRecipe : findAll()) {
