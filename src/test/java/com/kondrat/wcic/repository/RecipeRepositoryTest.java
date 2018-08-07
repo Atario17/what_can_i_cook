@@ -74,14 +74,11 @@ public class RecipeRepositoryTest {
 
     @Test
     public void putInDB(){
-        SmallRecipe smallRecipe = new SmallRecipe("Жареная картошка", 1);
-        smallRecipe.setInstruction("Почистить, пожарить.");
-        SmallRecipe smallRecipe1 = new SmallRecipe("Борщ", 2);
+        Integer id = ThreadLocalRandom.current().nextInt();
+        SmallRecipe smallRecipe1 = new SmallRecipe("Борщ", id);
         smallRecipe1.setInstruction("СмешатЬ, сварить.");
-        recipeRepository.save(smallRecipe);
         recipeRepository.save(smallRecipe1);
-        assertNotNull(recipeRepository.findById(1).orElse(null));
-        assertNotNull(recipeRepository.findById(2).orElse(null));
+        assertNotNull(recipeRepository.findById(id).orElse(null));
     }
 
     @Test
