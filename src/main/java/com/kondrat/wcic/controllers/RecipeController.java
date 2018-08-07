@@ -32,17 +32,6 @@ public class RecipeController {
         SmallRecipe smallrecipe1 = new SmallRecipe("Жареная картошка", 1);
         SmallRecipe smallrecipe2 = new SmallRecipe("Драники", 2);
         SmallRecipe smallrecipe3 = new SmallRecipe("Пишманье", 3);
-        recipeRepository.save(smallrecipe1);
-        recipeRepository.save(smallrecipe2);
-        recipeRepository.save(smallrecipe3);
-
-        User user1 = new User(1, "Ivanov", "iii");
-        user1.getFavouriteRecipes().add(smallrecipe1);
-        user1.getFavouriteRecipes().add(smallrecipe2);
-        User user2 = new User(2, "Sidorov", "sss");
-
-        userRepository.save(user1);
-        userRepository.save(user2);
 
         smallrecipe1.getIngredients().addAll(ingredientRepository.
                 createIfNotExists(Arrays.asList("картофель", "лук", "масло подсолнечное", "соль")));
@@ -53,10 +42,19 @@ public class RecipeController {
                 createIfNotExists(Arrays.asList("картофель", "лук", "масло подсолнечное", "соль", "мука", "яйца куриные")));
         smallrecipe2.setInstruction("Смешать, пожарить.");
         recipeRepository.save(smallrecipe2);
+
         smallrecipe3.getIngredients().addAll(ingredientRepository.
                 createIfNotExists(Arrays.asList("мука")));
         smallrecipe3.setInstruction("Пожарить");
         recipeRepository.save(smallrecipe3);
+
+        User user1 = new User(1, "Ivanov", "iii");
+        user1.getFavouriteRecipes().add(smallrecipe1);
+        user1.getFavouriteRecipes().add(smallrecipe2);
+        userRepository.save(user1);
+
+        User user2 = new User(2, "Sidorov", "sss");
+        userRepository.save(user2);
     }
 
     @GetMapping("/welcomeToWCIC")
@@ -106,7 +104,6 @@ public class RecipeController {
     }
 
     @PostMapping("/listOfRecipes")
-    // public String showListOfRecipes(Model model, String param1, String param2, String param3, String param4, String param5, String param6){
     public String showListOfRecipes(Model model, String[] param) {
         String result;
         List<String> userIngredients = new ArrayList<>();
@@ -189,7 +186,6 @@ public class RecipeController {
     }
 
     @PostMapping("/addRecipe")
-    //public String showNewRecipe(Model model, String name, String [] param, String desc){
     public String showNewRecipe(Model model, CreateRecipeRequest createRecipeRequest) {
         if (createRecipeRequest.getIngredients().size() == 0) {
             return "Error";

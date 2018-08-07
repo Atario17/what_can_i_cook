@@ -1,9 +1,7 @@
 package com.kondrat.wcic.controllers;
 
-import com.kondrat.wcic.domain.Ingredient;
 import com.kondrat.wcic.domain.SmallRecipe;
 import com.kondrat.wcic.repository.IngredientRepository;
-import com.kondrat.wcic.repository.OldRecipeRepository;
 import com.kondrat.wcic.repository.RecipeRepository;
 import com.kondrat.wcic.repository.UserRepository;
 import org.junit.Before;

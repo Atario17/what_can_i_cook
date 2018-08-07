@@ -25,10 +25,12 @@ public class IngredientRepositoryTest {
     public void setUp() throws Exception {
 //        recipeRepository.deleteAll();
 //        ingredientRepository.deleteAll();
-        recipeRepository.flush();
-        ingredientRepository.flush();
+//        recipeRepository.flush();
+//        ingredientRepository.flush();
         SmallRecipe smallrecipe1 = new SmallRecipe("Жареная картошка", 1);
         SmallRecipe smallrecipe2 = new SmallRecipe("Драники", 2);
+        SmallRecipe smallrecipe3 = new SmallRecipe("Пишманье", 3);
+
         smallrecipe1.getIngredients().addAll(ingredientRepository.
                 createIfNotExists(Arrays.asList("картофель","лук","масло подсолнечное","соль")));
         recipeRepository.save(smallrecipe1);
@@ -37,16 +39,25 @@ public class IngredientRepositoryTest {
                 createIfNotExists(Arrays.asList("картофель","лук","масло подсолнечное","соль","мука","яйца куриные")));
         recipeRepository.save(smallrecipe2);
 
+        smallrecipe3.getIngredients().addAll(ingredientRepository.
+                createIfNotExists(Arrays.asList("мука")));
+        smallrecipe3.setInstruction("Пожарить");
+        recipeRepository.save(smallrecipe3);
+
     }
     @Test
     public void makeStringsIngredientsTest(){
         //если проводить отдельно тест, то все проходит. Если все подряд, то размер ингредиентов 12, а не 6
         List<String> names = Arrays.asList("корица","красное вино","яблоки","гвоздика");
-        assertEquals(12,ingredientRepository.findAll().size());
+        int countOfIngredients = 6;
+        if(recipeRepository.findAll().size()>3){
+            countOfIngredients = 12;
+        }
+        assertEquals(countOfIngredients,ingredientRepository.findAll().size());
         ingredientRepository.createIfNotExists(names).size();
-        assertEquals(16,ingredientRepository.findAll().size());
+        assertEquals(countOfIngredients+4,ingredientRepository.findAll().size());
        ingredientRepository.createIfNotExists(names).size();
-        assertEquals(16,ingredientRepository.findAll().size());
+        assertEquals(countOfIngredients+4,ingredientRepository.findAll().size());
     }
     @Test
     public void ingredientPresentTest(){

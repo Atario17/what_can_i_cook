@@ -30,14 +30,11 @@ public class RecipeRepositoryTest {
     @Autowired
     RecipeController recipeController;
 
-//    @Before
-    public void setUp() throws Exception {
-//        recipeRepository.deleteAll();
-//        ingredientRepository.deleteAll();
-//        recipeRepository.flush();
-//        ingredientRepository.flush();
+    public void toFillInTheData(){
         SmallRecipe smallrecipe1 = new SmallRecipe("Жареная картошка", 1);
         SmallRecipe smallrecipe2 = new SmallRecipe("Драники", 2);
+        SmallRecipe smallrecipe3 = new SmallRecipe("Пишманье", 3);
+
         smallrecipe1.getIngredients().addAll(ingredientRepository.
                 createIfNotExists(Arrays.asList("картофель","лук","масло подсолнечное","соль")));
         recipeRepository.save(smallrecipe1);
@@ -46,8 +43,34 @@ public class RecipeRepositoryTest {
                 createIfNotExists(Arrays.asList("картофель","лук","масло подсолнечное","соль","мука","яйца куриные")));
         recipeRepository.save(smallrecipe2);
 
+        smallrecipe3.getIngredients().addAll(ingredientRepository.
+                createIfNotExists(Arrays.asList("мука")));
+        smallrecipe3.setInstruction("Пожарить");
+        recipeRepository.save(smallrecipe3);
     }
+//    @Before
+    public void setUp() throws Exception {
+//        recipeRepository.deleteAll();
+//        ingredientRepository.deleteAll();
+        recipeRepository.flush();
+        ingredientRepository.flush();
+        SmallRecipe smallrecipe1 = new SmallRecipe("Жареная картошка", 1);
+        SmallRecipe smallrecipe2 = new SmallRecipe("Драники", 2);
+        SmallRecipe smallrecipe3 = new SmallRecipe("Пишманье", 3);
 
+        smallrecipe1.getIngredients().addAll(ingredientRepository.
+                createIfNotExists(Arrays.asList("картофель","лук","масло подсолнечное","соль")));
+        recipeRepository.save(smallrecipe1);
+
+        smallrecipe2.getIngredients().addAll(ingredientRepository.
+                createIfNotExists(Arrays.asList("картофель","лук","масло подсолнечное","соль","мука","яйца куриные")));
+        recipeRepository.save(smallrecipe2);
+
+        smallrecipe3.getIngredients().addAll(ingredientRepository.
+                createIfNotExists(Arrays.asList("мука")));
+        smallrecipe3.setInstruction("Пожарить");
+        recipeRepository.save(smallrecipe3);
+    }
 
     @Test
     public void putInDB(){
@@ -93,9 +116,8 @@ public class RecipeRepositoryTest {
         assertNotNull(recipeRepository.getRecipesForIngredientJpa("лук"));
         assertEquals(2, recipeRepository.getRecipesForIngredientJpa("картофель").size());
         assertEquals(0, recipeRepository.getRecipesForIngredientJpa("сахар").size());
-//        assertEquals(1, recipeRepository.fjhgfjhgf("Жареная картошка"));
-
     }
+
     @Test
     public void getSuitableRecipesTestJpa(){
 
@@ -108,6 +130,7 @@ public class RecipeRepositoryTest {
 //    assertEquals(1, recipeRepository.getSuitableRecipes());
 //
 //    }
+
     @Test
     public void getSuitableRecipesTest2(){
         List<String> params = new ArrayList<>();
@@ -141,7 +164,6 @@ public class RecipeRepositoryTest {
     }
     @Test
     public void findByNameTest(){
-        //haha
         String randomString = UUID.randomUUID().toString();
         Integer id = ThreadLocalRandom.current().nextInt();
         //сделать с новым именем рецепт и работать с ним

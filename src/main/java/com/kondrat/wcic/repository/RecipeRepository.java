@@ -16,7 +16,6 @@ public interface RecipeRepository extends JpaRepository<SmallRecipe, Integer> {
 
     SmallRecipe findByName(String name);
 
-    //новый метод вместо addNewRecipe, проверяет на наличие в бд, но не особо коротко вышло
     default SmallRecipe createIfNotExists(String name, List<Ingredient> params, String desc) {
         SmallRecipe newSmallRecipe = new SmallRecipe(name, (int) (Math.random() * 1000000));
         newSmallRecipe.setInstruction(desc);
@@ -29,9 +28,9 @@ public interface RecipeRepository extends JpaRepository<SmallRecipe, Integer> {
         return newSmallRecipe;
     }
 
-    default List<SmallRecipe> getRecipesForIngredient(String param){
-        List<SmallRecipe>listForRecipes = findAll();
-        List<SmallRecipe>suitableRecipes = new ArrayList<>();
+    default List<SmallRecipe> getRecipesForIngredient(String param) {
+        List<SmallRecipe> listForRecipes = findAll();
+        List<SmallRecipe> suitableRecipes = new ArrayList<>();
         for (SmallRecipe smallRecipe : listForRecipes) {
             for (int i = 0; i < smallRecipe.getIngredients().size(); i++) {
                 if (smallRecipe.getIngredients().get(i).getName().equals(param)) {
@@ -41,9 +40,11 @@ public interface RecipeRepository extends JpaRepository<SmallRecipe, Integer> {
         }
         return suitableRecipes;
     }
+
     //выбрать все объекты а типа SmallRecipe у которых есть ингредиент с именем
     @Query("select a from SmallRecipe a join a.ingredients i where i.name = ?1")
     List<SmallRecipe> getRecipesForIngredientJpa(String ingredient);
+
     //потом доделаем
     @Query("select a from SmallRecipe a join a.ingredients i where i.name = ?1")
     List<SmallRecipe> getSuitableRecipesJpa(List<String> params);
@@ -69,44 +70,5 @@ public interface RecipeRepository extends JpaRepository<SmallRecipe, Integer> {
         }
         return suitablesRecipes;
     }
-
-//    int fjhgfjhgf(String recipe);
-    //    default List<SmallRecipe> removeElement(String name){
-//        if(findAll().size()!=0) {
-//            for (SmallRecipe smallRecipe : findAll()) {
-//                if(smallRecipe.getLogin().equals(name)){
-//                    delete(smallRecipe);
-//                    break;
-//                }
-//            }
-//        }
-//        return findAll();
-//    }
-//    default List<SmallRecipe> removeElement2(String name){
-//        if(findAll().size()!=0) {
-//                deleteById(findByLogin(name).getId());
-//        }
-//        return findAll();
-//    }
-
-    //    default SmallRecipe addNewRecipe(String name, String desc, List<Ingredient> params){
-//        int id = (int)(Math.random()*1000000);
-//        SmallRecipe smallRecipe = new SmallRecipe(name,id);
-//        smallRecipe.setInstruction(desc);
-//        smallRecipe.getIngredients().addAll(params);
-//        save(smallRecipe);
-//        return smallRecipe;
-//    }
-//  default SmallRecipe getRecipesById(Integer id){
-//        return findById(id).orElse(null);
-//    }
-
-//    void deleteByName(SmallRecipe smallRecipe);
-//
-//    void removeByName(String name);
-//
-//    void findByNameAndDelete(String name);
-//
-//    boolean existsByLogin(String name);
 }
 

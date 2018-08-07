@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.*;
-@Ignore
+//@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MyServiceTest {
@@ -56,6 +56,5 @@ public class MyServiceTest {
 
         assertEquals(4 ,calc1(c).get());
         assertEquals(4,c.get());
-
     }
 }
