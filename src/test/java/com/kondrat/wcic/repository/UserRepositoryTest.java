@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
-@Ignore
+//@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest
 
@@ -28,14 +28,17 @@ public class UserRepositoryTest {
     @Test
     public void createIfNotExistsTest(){
         //BBB
-        assertTrue(userRepository.createIfNotExists(new User((int) (Math.random() * 1000000),"Vasya", "123")));
+        assertTrue(userRepository.createIfNotExists(new User((int) (Math.random() * 1000000),
+                "Vasya", "123")));
         assertEquals(3,userRepository.findAll().size());
-        assertFalse(userRepository.createIfNotExists( new User((int) (Math.random() * 1000000),"Vasya", "123")));
+        assertFalse(userRepository.createIfNotExists( new User((int) (Math.random() * 1000000),
+                "Vasya", "123")));
         assertEquals(3,userRepository.findAll().size());
-        assertTrue(userRepository.createIfNotExists( new User((int) (Math.random() * 1000000),"Lera", "ggg")));
+        assertTrue(userRepository.createIfNotExists( new User((int) (Math.random() * 1000000),
+                "Lera", "ggg")));
         assertEquals(4,userRepository.findAll().size());
-
     }
+
     @Test
     public void  dataVerificationTest(){
         assertTrue(userRepository.dataVerification(CreateUserRequest.createUser("Ivanov", "iii")));
@@ -43,6 +46,7 @@ public class UserRepositoryTest {
         assertFalse(userRepository.dataVerification(CreateUserRequest.createUser("Vasek", "1234567")));
         assertEquals(2,userRepository.findAll().size());
     }
+
     @Test
     public void userPresentTest(){
         assertFalse(userRepository.userPresent("Vasya"));

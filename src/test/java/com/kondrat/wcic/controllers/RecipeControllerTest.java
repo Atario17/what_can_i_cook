@@ -1,9 +1,7 @@
 package com.kondrat.wcic.controllers;
 
-import com.kondrat.wcic.domain.Ingredient;
 import com.kondrat.wcic.domain.SmallRecipe;
 import com.kondrat.wcic.repository.IngredientRepository;
-import com.kondrat.wcic.repository.OldRecipeRepository;
 import com.kondrat.wcic.repository.RecipeRepository;
 import com.kondrat.wcic.repository.UserRepository;
 import org.junit.Before;
@@ -114,12 +112,10 @@ public class RecipeControllerTest {
     public void recipesForIngredientTest() {
         MyModel model = new MyModel();
         recipeController.showRecipesForIngredient(model, "картофель");
-
         assertNotNull(model.obj);
         assertTrue(model.obj instanceof List);
 
         List<SmallRecipe> recipes = (List<SmallRecipe>) model.obj;
-
         assertEquals(2, recipes.size());
         assertEquals("картофель", model.obj1);
         assertEquals(1, recipes.get(0).getId());
@@ -148,8 +144,11 @@ public class RecipeControllerTest {
 
     @Test
     public void showNewRecipеTest() {
-//        OldRecipeRepository oldRecipeRepository = new OldRecipeRepository();
         MyModel model = new MyModel();
+        if(recipeRepository.findAll().size()<3){
+            recipeController.showNewRecipe(model, new CreateRecipeRequest("Пишманье",Arrays.asList("мука"),
+                    "смешать и пожарить"));
+        }
         List<String> ingredients1 = new ArrayList<>(Arrays.asList("мука", "яйца куриные",
                 "молоко", "масло подсолнечное", "соль", "сахар"));
         List<String> ingredients2 = new ArrayList<>(Arrays.asList("картофель", "морковь",
@@ -163,10 +162,10 @@ public class RecipeControllerTest {
                 "масло подсолнечное", "соль", "картофель", "лук"),
                 "Смешать, раскалить сковороду, пожарить."));
         assertEquals(4, recipeController.recipeRepository.findAll().size());
-        recipeController.showNewRecipe(model, new CreateRecipeRequest("Борщ", Arrays.asList("картофель", "морковь",
-                "свекла", "соль", "капуста", "помидоры"),
+        recipeController.showNewRecipe(model, new CreateRecipeRequest("Борщ", ingredients2,
                 "Нарезать, добавить поочередно в бульон, варить"));
         assertEquals(5, recipeController.recipeRepository.findAll().size());
+        //нужно ли со строки 171 по 182 в этом методе удалять те рецепты, что создавались в пределах этого же метода?
 //        for(Ingredient ingredient : recipeRepository.findByName("Борщ").getIngredients()){
 //            if(ingredient.getName()!="соль" || ingredient.getName()!="картофель") {
 //                recipeController.removeIngredient(model, null, ingredient.getName());
@@ -201,10 +200,7 @@ public class RecipeControllerTest {
         assertEquals("success", recipeController.verifyUser(model, user1));
         assertEquals("Error", recipeController.verifyUser(model, user2));
         assertEquals("Error", recipeController.verifyUser(model, user3));
-//        assertNotNull(model.obj);
-//        assertTrue(model.obj instanceof String);
-//        String name2 = (String)model.obj;
-//        assertEquals("Vasya", name2);
+
         assertEquals(2, userRepository.findAll().size());
     }
 

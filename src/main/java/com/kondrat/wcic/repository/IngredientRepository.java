@@ -33,7 +33,6 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
 
     boolean existsByNameAndId(String name, int id);
 
-
     boolean existsByName(String name);
 }
 /*
