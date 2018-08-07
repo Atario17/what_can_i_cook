@@ -71,19 +71,13 @@ public class IngredientRepositoryTest {
     public void makeStringsIngredientsTest(){
         //если проводить отдельно тест, то все проходит. Если все подряд, то размер ингредиентов 12, а не 6
         toFillInTheData();
+        assertEquals(6, ingredientRepository.findAll().size());
         List<String> names = Arrays.asList("корица","красное вино","яблоки","гвоздика");
-        int countOfIngredients = 6;
-        if(recipeRepository.findAll().size()>3){
-            countOfIngredients = 12;
-        }else{
-            countOfIngredients = 6;
-        }
-        assertEquals(countOfIngredients,ingredientRepository.findAll().size());
-        ingredientRepository.createIfNotExists(names).size();
-        assertEquals(countOfIngredients+4,ingredientRepository.findAll().size());
+        ingredientRepository.createIfNotExists(names);
+        assertEquals(10,ingredientRepository.findAll().size());
        ingredientRepository.createIfNotExists(names).size();
-        assertEquals(countOfIngredients+4,ingredientRepository.findAll().size());
-        toClearData();
+        assertEquals(10,ingredientRepository.findAll().size());
+
     }
     @Test
     public void ingredientPresentTest(){

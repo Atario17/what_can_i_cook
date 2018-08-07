@@ -1,5 +1,6 @@
 package com.kondrat.wcic.controllers;
 
+import com.kondrat.wcic.domain.Ingredient;
 import com.kondrat.wcic.domain.SmallRecipe;
 import com.kondrat.wcic.repository.IngredientRepository;
 import com.kondrat.wcic.repository.RecipeRepository;
@@ -144,15 +145,15 @@ public class RecipeControllerTest {
 
     @Test
     public void showNewRecipеTest() {
+        assertEquals(6, ingredientRepository.findAll().size());
         MyModel model = new MyModel();
         if(recipeRepository.findAll().size()<3){
             recipeController.showNewRecipe(model, new CreateRecipeRequest("Пишманье",Arrays.asList("мука"),
                     "смешать и пожарить"));
         }
+        assertEquals(6, ingredientRepository.findAll().size());
         List<String> ingredients1 = new ArrayList<>(Arrays.asList("мука", "яйца куриные",
                 "молоко", "масло подсолнечное", "соль", "сахар"));
-        List<String> ingredients2 = new ArrayList<>(Arrays.asList("картофель", "морковь",
-                "свекла", "соль", "капуста", "помидоры"));
         recipeController.showNewRecipe(model, new CreateRecipeRequest("Блины", ingredients1,
                 "Смешать, раскалить сковороду, пожарить."));
         assertTrue(model.obj instanceof List);
@@ -162,23 +163,12 @@ public class RecipeControllerTest {
                 "масло подсолнечное", "соль", "картофель", "лук"),
                 "Смешать, раскалить сковороду, пожарить."));
         assertEquals(4, recipeController.recipeRepository.findAll().size());
-        recipeController.showNewRecipe(model, new CreateRecipeRequest("Борщ", ingredients2,
-                "Нарезать, добавить поочередно в бульон, варить"));
-        assertEquals(5, recipeController.recipeRepository.findAll().size());
-        //нужно ли со строки 171 по 182 в этом методе удалять те рецепты, что создавались в пределах этого же метода?
-//        for(Ingredient ingredient : recipeRepository.findByName("Борщ").getIngredients()){
-//            if(ingredient.getName()!="соль" || ingredient.getName()!="картофель") {
-//                recipeController.removeIngredient(model, null, ingredient.getName());
-//            }
-//        }
-//        recipeController.removeIngredient(model,null,"сахар");
-//        recipeController.removeIngredient(model,null,"соль");
-//        recipeController.removeIngredient(model,null,"молоко");
-//        recipeController.removeIngredient(model,null,"сахар");
-        recipeController.removeRecipe(model, null, "Блины");
-        recipeController.removeRecipe(model, null, "Борщ");
-//        assertEquals(6, ingredientRepository.findAll().size());
 
+        recipeRepository.findByName("Блины").getIngredients().clear();
+        recipeController.removeRecipe(model, null, "Блины");
+        recipeController.removeIngredient(model,null,"молоко");
+        recipeController.removeIngredient(model,null,"сахар");
+        assertEquals(6, ingredientRepository.findAll().size());
     }
 
     @Test
