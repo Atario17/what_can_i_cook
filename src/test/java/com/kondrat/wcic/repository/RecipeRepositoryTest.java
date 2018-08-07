@@ -48,6 +48,11 @@ public class RecipeRepositoryTest {
         smallrecipe3.setInstruction("Пожарить");
         recipeRepository.save(smallrecipe3);
     }
+    public void toClearData(){
+        recipeRepository.deleteById(1);
+        recipeRepository.deleteById(2);
+        recipeRepository.deleteById(3);
+    }
 //    @Before
     public void setUp() throws Exception {
 //        recipeRepository.deleteAll();
@@ -96,10 +101,12 @@ public class RecipeRepositoryTest {
 
     @Test
     public void removeElementTest() {//больше не используем лог.метод removeElement
+        toFillInTheData();
         Integer before = recipeRepository.findAll().size();
         recipeRepository.delete(recipeRepository.findByName("Пишманье"));// работает
         Integer after = recipeRepository.findAll().size();
         assertTrue(after<before);
+
     }
 //    @Test
 //    public void getRecipesForIngredientTest(){
@@ -109,10 +116,12 @@ public class RecipeRepositoryTest {
 
     @Test
     public void getRecipesForIngredientJpaTest(){
+        toFillInTheData();
         assertNotNull(recipeRepository.getRecipesForIngredientJpa("картофель"));
         assertNotNull(recipeRepository.getRecipesForIngredientJpa("лук"));
         assertEquals(2, recipeRepository.getRecipesForIngredientJpa("картофель").size());
         assertEquals(0, recipeRepository.getRecipesForIngredientJpa("сахар").size());
+
     }
 
     @Test
